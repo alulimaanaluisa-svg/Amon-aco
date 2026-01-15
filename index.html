@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amoníaco (NH₃) - Universidad Técnica Particular de Loja</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto+Slab:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.5s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+        }
+        
+        .title-group h1 {
+            font-family: 'Roboto Slab', serif;
+            font-size: 2.5em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+        
+        .title-group p {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+        
+        .nav-btn.active {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .hero {
+            background: white;
+            border-radius: 30px;
+            padding: 60px;
+            margin: 30px 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .molecule-display {
+            font-size: 5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 20px 0;
+            font-family: 'Roboto Slab', serif;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .team {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
+        .team-member {
+            background: linear-gradient(135deg, #f6f9fc 0%, #e9f0f7 100%);
+            padding: 20px 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+        }
+        
+        .team-member::before {
+            content: '👤';
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 25px;
+            padding: 40px;
+            margin: 20px 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+        }
+        
+        .card h2 {
+            font-family: 'Roboto Slab', serif;
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .card h3 {
+            color: #764ba2;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+        
+        .icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+        }
+        
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .property-card {
+            background: linear-gradient(135deg, #f6f9fc 0%, #e9f0f7 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+        
+        .property-card:hover {
+            transform: translateX(5px);
+            border-left-color: #4facfe;
+        }
+        
+        .property-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin: 40px 0;
+            position: relative;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+        
+        .timeline-content {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            width: 45%;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.2);
+        }
+        
+        .timeline-year {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: white;
+            border: 4px solid #667eea;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+        }
+        
+        .formula-display {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 2em;
+            font-weight: 700;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .molecular-structure {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            gap: 20px;
+        }
+        
+        .atom {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5em;
+            color: white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .atom.nitrogen {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            animation-delay: 0s;
+        }
+        
+        .atom.hydrogen {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            width: 60px;
+            height: 60px;
+            font-size: 1.2em;
+        }
+        
+        .atom.hydrogen:nth-of-type(2) { animation-delay: 0.3s; }
+        .atom.hydrogen:nth-of-type(3) { animation-delay: 0.6s; }
+        .atom.hydrogen:nth-of-type(4) { animation-delay: 0.9s; }
+        
+        .bond {
+            width: 40px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+        
+        .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .application-card {
+            background: linear-gradient(135deg, #f6f9fc 0%, #e9f0f7 100%);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .application-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+        }
+        
+        .application-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe6cc 100%);
+            border-left: 5px solid #ffa726;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            text-align: center;
+            border-radius: 25px;
+            margin-top: 40px;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+        }
+        
+        footer p {
+            color: #666;
+            margin: 5px 0;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            margin: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                flex-direction: column !important;
+            }
+            
+            .timeline-content {
+                width: 100%;
+                margin-left: 40px;
+            }
+            
+            .timeline-dot {
+                left: 20px;
+            }
+            
+            .molecular-structure {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">NH₃</div>
+                <div class="title-group">
+                    <h1>Amoníaco</h1>
+                    <p>Universidad Técnica Particular de Loja</p>
+                </div>
+            </div>
+            <nav>
+                <button class="nav-btn active" onclick="showSection('inicio')">Inicio</button>
+                <button class="nav-btn" onclick="showSection('propiedades')">Propiedades</button>
+                <button class="nav-btn" onclick="showSection('historia')">Historia</button>
+                <button class="nav-btn" onclick="showSection('aplicaciones')">Aplicaciones</button>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- SECCIÓN INICIO -->
+        <div id="inicio" class="content-section active">
+            <div class="hero">
+                <div class="molecule-display">NH₃</div>
+                <h2 style="font-size: 2.5em; color: #667eea; margin-bottom: 20px;">AMONÍACO</h2>
+                <p class="subtitle">Compuesto Químico Inorgánico Fundamental</p>
+                
+                <div class="molecular-structure">
+                    <div class="atom hydrogen">H</div>
+                    <div class="bond"></div>
+                    <div class="atom nitrogen">N</div>
+                    <div class="bond"></div>
+                    <div class="atom hydrogen">H</div>
+                    <div class="bond"></div>
+                    <div class="atom hydrogen">H</div>
+                </div>
+                
+                <p style="font-size: 1.1em; line-height: 1.8; color: #555; max-width: 900px; margin: 30px auto;">
+                    El amoníaco es un gas incoloro de olor característico y picante, muy soluble en agua. 
+                    Fundamental en la agricultura como base para fertilizantes nitrogenados, la industria química, 
+                    refrigeración y como vector energético en la transición hacia energías limpias.
+                </p>
+                
+                <div class="team">
+                    <div class="team-member">Ariana Peña</div>
+                    <div class="team-member">Jennifer Sarango</div>
+                    <div class="team-member">Ariel Parra</div>
+                    <div class="team-member">Ali Panamito</div>
+                </div>
+                
+                <p style="margin-top: 30px; color: #888;">Ingeniería Química | Introducción a la Ingeniería Química | Octubre 2025 - Febrero 2026</p>
+            </div>
+            
+            <div class="card">
+                <h2><span class="icon">📖</span> Definición y Descubrimiento</h2>
+                <p style="line-height: 1.8; color: #555;">
+                    El amoníaco fue aislado por primera vez en <strong>1774</strong> por el químico sueco 
+                    <strong>Carl Wilhelm Scheele</strong>, quien lo identificó como un gas alcalino producido al calentar 
+                    sal de amonio con óxidos metálicos. El químico francés <strong>Claude Louis Berthollet</strong> determinó 
+                    su composición química y le dio el nombre de "amoníaco", derivado del término griego <em>ammoniakos</em>, 
+                    en referencia al sal ammoniac (cloruro de amonio), asociada al templo del dios Amón en Libia.
+                </p>
+                
+                <div class="highlight-box">
+                    <strong>Impacto Global:</strong> Desde su descubrimiento en el siglo XVIII, el amoníaco ha desempeñado 
+                    un papel crucial en la agricultura y la industria. Su impacto global se multiplicó con el desarrollo del 
+                    proceso Haber-Bosch a principios del siglo XX, revolucionando la producción de fertilizantes y transformando 
+                    la seguridad alimentaria mundial.
+                </div>
+            </div>
+        </div>
+        
+        <!-- SECCIÓN PROPIEDADES -->
+        <div id="propiedades" class="content-section">
+            <div class="card">
+                <h2><span class="icon">⚛️</span> Propiedades del Amoníaco</h2>
+                
+                <h3>Propiedades Generales</h3>
+                <div class="properties-grid">
+                    <div class="property-card">
+                        <h4>🎨 Apariencia</h4>
+                        <p>Gas incoloro con olor desagradable y nauseabundo, fácilmente perceptible en bajas concentraciones</p>
+                    </div>
+                    <div class="property-card">
+                        <h4>⚖️ Densidad Relativa</h4>
+                        <p>0.589 veces la del aire atmosférico (más ligero que el aire)</p>
+                    </div>
+                    <div class="property-card">
+                        <h4>🌡️ Punto de Ebullición</h4>
+                        <p>-33.3 °C</p>
+                    </div>
+                    <div class="property-card">
+                        <h4>❄️ Punto de Congelación</h4>
+                        <p>-77.7 °C (forma cristales blancos)</p>
+                    </div>
+                    <div class="property-card">
+                        <h4>💧 Solubilidad</h4>
+                        <p>Más de 30 g/100 mL en agua a 20 °C (altamente soluble)</p>
+                    </div>
+                    <div class="property-card">
+                        <h4>📊 pH en Solución</h4>
+                        <p>Aproximadamente 11.6 en solución acuosa 1 M</p>
+                    </div>
+                </div>
+                
+                <h3>Estructura Molecular</h3>
+                <div class="formula-display">
+                    Geometría: Trigonal Piramidal
+                </div>
+                <p style="line-height: 1.8; color: #555;">
+                    La molécula de amoniaco (NH₃) presenta una <strong>geometría trigonal piramidal</strong> según la teoría VSEPR. 
+                    El átomo de nitrógeno central posee cuatro pares de electrones: tres enlaces covalentes con hidrógeno y 
+                    un par libre. El par libre ejerce mayor repulsión, reduciendo el ángulo de enlace H-N-H a <strong>106.7°</strong> 
+                    (menor que el ángulo tetraédrico ideal de 109.5°).
+                </p>
+                
+                <div class="properties-grid" style="margin-top: 30px;">
+                    <div class="property-card">
+                        <h4>🔋 Naturaleza Básica</h4>
+                        <p>Actúa como base de Brønsted-Lowry, capaz de aceptar protones para formar el ion amonio (NH₄⁺)</p>
+                    </div>
+                    <div class="property-card">
+                        <h4>🔗 Puentes de Hidrógeno</h4>
+                        <p>Molécula altamente polar que forma puentes de hidrógeno, explicando su gran solubilidad</p>
+                    </div>
+                    <div class="property-card">
+                        <h4>⚡ Entalpía de Vaporización</h4>
+                        <p>23.35 kJ/mol (comparado con 8.19 kJ/mol del metano)</p>
+                    </div>
+                    <div class="property-card">
+                        <h4>📡 Inversión del Nitrógeno</h4>
+                        <p>Frecuencia resonante de 23.79 GHz - primera señal en espectroscopia de microondas</p>
+                    </div>
+                </div>
+                
+                <h3>Estado Líquido</h3>
+                <p style="line-height: 1.8; color: #555; margin-top: 20px;">
+                    El amoníaco líquido posee una <strong>alta constante dieléctrica (ε ≈ 22)</strong>, confiriéndole 
+                    fuertes propiedades ionizantes similares al agua. Su alta entalpía de vaporización permite su uso 
+                    en laboratorios sin refrigeración criogénica inmediata.
+                </p>
+                
+                <h3>Estado Sólido</h3>
+                <p style="line-height: 1.8; color: #555; margin-top: 20px;">
+                    Cristaliza en una estructura de simetría cúbica con símbolo Pearson cP16, grupo espacial P2₁3 
+                    y constante de red de 0.5125 nm.
+                </p>
+                
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <strong>Fenómeno Cuántico:</strong> El amoníaco experimenta inversión del nitrógeno a temperatura 
+                    ambiente: el átomo de nitrógeno "atraviesa" el plano formado por los tres átomos de hidrógeno. 
+                    La barrera energética es de 24.7 kJ/mol, con frecuencia resonante de 23.79 GHz, correspondiente 
+                    a radiación de microondas con longitud de onda de 1.260 cm.
+                </div>
+            </div>
+        </div>
+        
+        <!-- SECCIÓN HISTORIA -->
+        <div id="historia" class="content-section">
+            <div class="card">
+                <h2><span class="icon">📜</span> Historia y Evolución</h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-year">1774</div>
+                            <h4>Descubrimiento del Amoníaco</h4>
+                            <p>Carl Wilhelm Scheele aisla por primera vez el amoníaco como gas alcalino. 
+                            Claude Louis Berthollet determina su composición química.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-year">Siglo XIX</div>
+                            <h4>Método Tradicional: Destilación del Carbón</h4>
+                            <p>El amoníaco se obtenía como subproducto de la destilación de la hulla en la producción 
+                            de coque y gas de alumbrado. Método limitado, ineficiente y dependiente de la industria 
+                            del carbón, insuficiente para la creciente demanda.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-year">1909</div>
+                            <h4>Fritz Haber - Desarrollo en Laboratorio</h4>
+                            <p>El químico alemán Fritz Haber desarrolla la reacción de síntesis de amoníaco en 
+                            laboratorio, comprendiendo la fijación del nitrógeno atmosférico.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-year">1913</div>
+                            <h4>Proceso Haber-Bosch Industrial</h4>
+                            <p>Carl Bosch escala el proceso a nivel industrial para BASF. Revoluciona la producción 
+                            de fertilizantes y transforma la seguridad alimentaria mundial.</p>
+                            <div class="formula-display" style="font-size: 1.2em; margin-top: 15px;">
+                                N₂(g) + 3H₂(g) ⇌ 2NH₃(g)
+                            </div>
+                            <p style="margin-top: 10px;"><strong>Condiciones:</strong> 150-300 atm, 400-500 °C, 
+                            catalizador de hierro con óxidos metálicos</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-year">1960s</div>
+                            <h4>Optimización de Catalizadores</h4>
+                            <p>Desarrollo de catalizadores más eficientes basados en rutenio, permitiendo operar 
+                            a presiones más bajas.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-year">2010s - Actualidad</div>
+                            <h4>Amoníaco "Verde"</h4>
+                            <p>Investigación en producción de amoníaco usando hidrógeno obtenido por electrólisis 
+                            del agua con energía renovable (eólica, solar), eliminando emisiones de CO₂.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box" style="margin-top: 40px;">
+                    <strong>Impacto Mundial:</strong> Se estima que alrededor del <strong>50% de la población mundial</strong> 
+                    depende de los alimentos cultivados con fertilizantes derivados del amoníaco sintético. El proceso 
+                    Haber-Bosch es considerado uno de los logros más importantes de la ingeniería química del siglo XX.
+                </div>
+                
+                <div class="card" style="background: linear-gradient(135deg, #f6f9fc 0%, #e9f0f7 100%); margin-top: 30px;">
+                    <h3 style="color: #667eea;">⚡ Eficiencia Energética</h3>
+                    <p style="line-height: 1.8; color: #555;">
+                        El proceso Haber-Bosch consume alrededor del <strong>1-2% de la energía global</strong>. 
+                        Se han implementado mejoras significativas en recuperación de calor, compresión y diseño 
+                        de reactores para reducir este consumo.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SECCIÓN APLICACIONES -->
+        <div id="aplicaciones" class="content-section">
+            <div class="card">
+                <h2><span class="icon">🔬</span> Aplicaciones del Amoníaco</h2>
+                
+                <div class="applications-grid">
+                    <div class="application-card">
+                        <div class="application-icon">🌾</div>
+                        <h3 style="color: #667eea;">Agricultura</h3>
+                        <p>Base fundamental para fertilizantes nitrogenados. El 50% de la población mundial depende 
+                        de alimentos cultivados con fertilizantes derivados del amoníaco.</p>
+                    </div>
+                    
+                    <div class="application-card">
+                        <div class="application-icon">❄️</div>
+                        <h3 style="color: #667eea;">Refrigeración Industrial</h3>
+                        <p>Alto calor latente de vaporización (23.35 kJ/mol) permite eficiente transferencia térmica 
+                        en sistemas de refrigeración a gran escala.</p>
+                    </div>
+                    
+                    <div class="application-card">
+                        <div class="application-icon">🏭</div>
+                        <h3 style="color: #667eea;">Reducción de Emisiones (SCR)</h3>
+                        <p>Agente reductor en sistemas de Reducción Catalítica Selectiva para reducir óxidos de 
+                        nitrógeno (NOₓ) en vehículos, centrales eléctricas y plantas industriales.</p>
+                    </div>
+                    
+                    <div class="application-card">
+                        <div class="application-icon">⚡</div>
+                        <h3 style="color: #667eea;">Vector Energético</h3>
+                        <p>Almacena y transporta hidrógeno de forma segura. Se licúa a presión moderada y temperatura 
+                        ambiente. Combustible en turbinas eléctricas y motores marinos.</p>
+                    </div>
+                    
+                    <div class="application-card">
+                        <div class="application-icon">🧪</div>
+                        <h3 style="color: #667eea;">Industria Química</h3>
+                        <p>Materia prima esencial para la producción de ácido nítrico, urea, y múltiples compuestos 
+                        químicos industriales.</p>
+                    </div>
+                    
+                    <div class="application-card">
+                        <div class="application-icon">🧼</div>
+                        <h3 style="color: #667eea;">Limpieza</h3>
+                        <p>Utilizado en productos de limpieza industrial y doméstica debido a sus propiedades 
+                        alcalinas y capacidad desengrasante.</p>
+                    </div>
+                </div>
+                
+                <div class="card" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); margin-top: 40px;">
+                    <h3 style="color: #43a047;">🌍 Transición Energética Limpia</h3>
+                    <p style="line-height: 1.8; color: #555;">
+                        El amoníaco se ha posicionado como un <strong>vector energético prometedor</strong> en la 
+                        transición hacia una economía baja en carbono. Puede almacenar y transportar hidrógeno de 
+                        forma más segura y eficiente que el H₂ gaseoso. Actualmente se realizan pruebas para usar 
+                        amoníaco como combustible en:
+                    </p>
+                    <ul style="margin-top: 15px; margin-left: 20px; color: #555; line-height: 1.8;">
+                        <li>Turbinas de generación eléctrica</li>
+                        <li>Motores marinos</li>
+                        <li>Transporte marítimo internacional</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <strong>Reacción SCR:</strong> En los sistemas de Reducción Catalítica Selectiva, el NH₃ 
+                    reacciona selectivamente con NOₓ en presencia de un catalizador para formar nitrógeno (N₂) 
+                    y agua (H₂O), compuestos inocuos para la atmósfera.
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2><span class="icon">⚠️</span> Seguridad y Manejo</h2>
+                
+                <div style="display: flex; gap: 20px; align-items: center; margin-top: 20px;">
+                    <div style="flex: 1;">
+                        <h3>Pictogramas de Seguridad</h3>
+                        <div style="display: flex; gap: 20px; margin-top: 15px;">
+                            <div style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                                <div style="font-size: 3em;">⚠️</div>
+                                <p style="margin-top: 10px; font-weight: 600;">GHS05</p>
+                                <p style="font-size: 0.9em; color: #666;">Corrosivo</p>
+                            </div>
+                            <div style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                                <div style="font-size: 3em;">☠️</div>
+                                <p style="margin-top: 10px; font-weight: 600;">GHS07</p>
+                                <p style="font-size: 0.9em; color: #666;">Irritante</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="flex: 1;">
+                        <h3>Precauciones</h3>
+                        <ul style="margin-top: 15px; line-height: 1.8; color: #555;">
+                            <li>Gas con olor desagradable perceptible en bajas concentraciones</li>
+                            <li>Puede causar irritación en ojos, piel y vías respiratorias</li>
+                            <li>Requiere ventilación adecuada en espacios cerrados</li>
+                            <li>Se desodoriza fácilmente al reaccionar con ácidos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <h3 style="color: #667eea; margin-bottom: 15px;">Universidad Técnica Particular de Loja</h3>
+            <p><strong>Ingeniería Química</strong></p>
+            <p>Introducción a la Ingeniería Química</p>
+            <p style="margin-top: 15px;">Período: Octubre 2025 - Febrero 2026</p>
+            <div style="margin-top: 20px;">
+                <span class="badge">Ariana Peña</span>
+                <span class="badge">Jennifer Sarango</span>
+                <span class="badge">Ariel Parra</span>
+                <span class="badge">Ali Panamito</span>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Actualizar botones activos
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Scroll suave al inicio
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
